@@ -2,7 +2,14 @@
 
 /* ***** Import All CSS ***** */
 
-
+@import 'css/bootstrap/bootstrap.min.css';
+@import 'css/others/animate.css';
+@import 'css/others/magnific-popup.css';
+@import 'css/others/owl.carousel.min.css';
+@import 'css/others/font-awesome.min.css';
+@import 'css/others/elegant-font.css';
+@import 'css/others/themify-icons.css';
+@import 'node_modules/font-awesome/css/font-awesome.css';
 
 /*========== SCROLL BAR ==========*/
 
