@@ -1,4 +1,4 @@
-
+import {toast} from 'react-toastify'
 import { useState } from 'react'
 import Leaflet from './Leaflet'
 import { useSelector } from 'react-redux'
@@ -6,9 +6,46 @@ import { useSelector } from 'react-redux'
 const Map = () => {
     const { plotName} = useSelector((state) => ({...state.plot}))
     let plotDetails = plotName
+    const [fullname, setFullname] = useState('')
+    const [email, setEmail] = useState('')
+    const [address, setAddress] = useState('')
+    const [country, setCountry] = useState('')
+    const [phone, setPhone] = useState('')
+    const [option, setOption] = useState('')
 
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault()
+        console.log(country)
+        if(fullname === ''){
+            return toast.error('Please enter your full name')
+        }
+        if(address === ''){
+            return toast.error('Please enter your Residential Address')
+        }
+        if(country === "Select Country"){
+            return toast.error('Please select your Country')
+        }
+        if(country === ""){
+            return toast.error('Please select your Country')
+        }
+        if(phone === ''){
+            return toast.error('Please enter your phone number')
+        }
+        if(option === 'Choose Option'){
+            return toast.error('Please select your country')
+        }
+        if(option === ''){
+            return toast.error('Please select if you are buying or reserving for 7 days')
+        }
+        if(plotDetails === ''){
+            const position = document.getElementById('top')
+            position.scrollIntoView({ behavior: 'smooth' });
+            return toast.error('Select the plot you wan to buy or reserve on the map ')
+        }
+    }
   return (
-    <div className="fancy-contact-area section-padding-100">
+    <div className="fancy-contact-area section-padding-100" id='top'>
         <div className="container">
             <div className="row mb-2">
                 <div className="col-12" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
@@ -37,32 +74,32 @@ const Map = () => {
                                 available plot, fill out the form and send us a message either buying or reserving. </p>
                         </div>
                         <div className="contact-form">
-                            <form action="#" method="post" id="message-form">
+                            <form onSubmit={handleFormSubmit} id="message-form">
 
                                 <div className="contact_input_area">
 
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="form-group">
-                                                <input type="text" className="form-control" name="name" id="name"
+                                                <input value={fullname} onChange={(e) => setFullname(e.target.value)} type="text" className="form-control text-dark" name="name" id="name"
                                                     placeholder="Full Name" />
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="form-group">
-                                                <input type="email" className="form-control" name="email" id="email"
+                                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control text-dark" name="email" id="email"
                                                     placeholder="Email" />
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="form-group">
-                                                <input type="text" className="form-control" name="address" id="email"
+                                                <input value={address} onChange={(e) => setAddress(e.target.value)} type="text" className="form-control text-dark" name="address" id="email"
                                                     placeholder="Residential Address" />
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="form-group">
-                                                <select className="form-control" name="countryCode" id="countryCode">
+                                                <select value={country} onChange={(e) => setCountry(e.target.value)} className="form-control text-dark" name="countryCode" id="countryCode">
                                                     <option value="Select Country"> Select Country</option>
                                                     <option data-countrycode="GH" value="233">Ghana (+233)</option>
 
@@ -419,13 +456,13 @@ const Map = () => {
                                         </div>
                                         <div className="col-12">
                                             <div className="form-group">
-                                                <input type="number" className="form-control" name="phone" id="email"
+                                                <input value={phone} onChange={(e) => setPhone(e.target.value)} type="number" className="form-control text-dark" name="phone" id="email"
                                                     placeholder="Phone Number" />
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="form-group">
-                                                <select className="form-control" name="status" id="status">
+                                                <select value={option} onChange={(e) => setOption(e.target.value)}  className="form-control text-dark" name="status" id="status">
                                                     <option value="Choose Option"> Choose Option</option>
                                                     <option value="Ready To Buy">Ready To Buy</option>
                                                     <option value="Reserve For Me"> Reserve For Me</option>
@@ -434,7 +471,7 @@ const Map = () => {
                                         </div>
                                         <div className="col-12">
                                             <div className="form-group">
-                                                <textarea readOnly name="message" className="form-control" id="message"
+                                                <textarea readOnly name="message" className="form-control text-dark" id="message"
                                                     cols="35" rows="15" value={plotDetails}></textarea>
                                             </div>
                                         </div>

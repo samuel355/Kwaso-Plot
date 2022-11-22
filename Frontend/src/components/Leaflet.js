@@ -8,9 +8,8 @@ import PlotInner from './PlotInner';
 const Leaflet = () => {
 
     const dispatch = useDispatch()
-    const {plots, plotName} = useSelector((state) => ({...state.plot}))
+    const {plots} = useSelector((state) => ({...state.plot}))
 
-    console.log(plotName)
     const center = [6.7588644098723805, -1.4987540245056152]
     const zoom = 17
 
