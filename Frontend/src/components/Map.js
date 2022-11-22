@@ -1,7 +1,12 @@
 
+import { useState } from 'react'
 import Leaflet from './Leaflet'
+import { useSelector } from 'react-redux'
 
 const Map = () => {
+    const { plotName} = useSelector((state) => ({...state.plot}))
+    let plotDetails = plotName
+
   return (
     <div className="fancy-contact-area section-padding-100">
         <div className="container">
@@ -430,8 +435,7 @@ const Map = () => {
                                         <div className="col-12">
                                             <div className="form-group">
                                                 <textarea readOnly name="message" className="form-control" id="message"
-                                                    cols="35" rows="15"
-                                                    placeholder="Check availabe Plots on the map to Buy or Reserve"></textarea>
+                                                    cols="35" rows="15" value={plotDetails}></textarea>
                                             </div>
                                         </div>
                                         <div className="col-12 text-center">
