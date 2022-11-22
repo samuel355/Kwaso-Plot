@@ -24,7 +24,7 @@ plotRouter.post('/addPlot', protect, asyncHandler(async(req, res) => {
 }))
 
 //FETCH ALL PLOTS
-plotRouter.get('/plots', protect, asyncHandler(async(req, res) => {
+plotRouter.get('/plots', asyncHandler(async(req, res) => {
     try{
         const plots = await PlotDetails.find()
         
@@ -35,8 +35,7 @@ plotRouter.get('/plots', protect, asyncHandler(async(req, res) => {
         }
         
     }catch(err){
-        res.status(500).json(err)
-        console.log(err)
+        res.status(500).json({message: err})
     }
 }))
 
