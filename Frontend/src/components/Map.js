@@ -16,7 +16,7 @@ const Map = () => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
-        console.log(country)
+
         if(fullname === ''){
             return toast.error('Please enter your full name')
         }
@@ -43,7 +43,9 @@ const Map = () => {
             position.scrollIntoView({ behavior: 'smooth' });
             return toast.error('Select the plot you wan to buy or reserve on the map ')
         }
+
     }
+
   return (
     <div className="fancy-contact-area section-padding-100" id='top'>
         <div className="container">
