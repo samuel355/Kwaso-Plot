@@ -18,10 +18,23 @@ const plotSlice = createSlice({
     initialState: {
         plots: [],
         plot:{},
+        plotName: '',
         loading: false,
         error: "",
     },
 
+    reducers: {
+        getPlotName : (state, action) => {
+            const plotName = state.plots.find((plot) => plot._id === action.payload)
+            if (plotName){
+                state.plotName = `Plot Number ${plotName.properties.Plot_No}  ${plotName.properties.Street_Nam} `;
+            }else{
+                console.log('Error Ocurred')
+            }
+        }
+    },
+
+    // Fetching Plots Cycle
     extraReducers: (builder) => {
         builder
           .addCase(getPlots.pending, (state, action) => {
@@ -38,4 +51,6 @@ const plotSlice = createSlice({
       }
 })
 
-export default plotSlice.reducer;
+export const {getPlotName} = plotSlice.actions
+
+export default plotSlice.reducer; 

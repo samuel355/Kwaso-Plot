@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Leaflet from './Leaflet'
 
 const Map = () => {

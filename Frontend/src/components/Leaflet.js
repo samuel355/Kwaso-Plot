@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import { MapContainer, TileLayer, Popup, Polygon, Polyline, } from 'react-leaflet'
 import "leaflet/dist/leaflet.css";
 import {useDispatch, useSelector} from 'react-redux'
-import { getPlots } from '../redux/features/PlotSlice';
+import { getPlots, getPlotName} from '../redux/features/PlotSlice';
 import PlotInner from './PlotInner';
 
 const Leaflet = () => {
 
     const dispatch = useDispatch()
-    const {plots} = useSelector((state) => ({...state.plot}))
+    const {plots, plotName} = useSelector((state) => ({...state.plot}))
 
+    console.log(plotName)
     const center = [6.7588644098723805, -1.4987540245056152]
     const zoom = 17
 
@@ -17,6 +18,12 @@ const Leaflet = () => {
         dispatch(getPlots())
     }, [dispatch])
 
+    const handleGetPlotName = (name) => {
+        dispatch(getPlotName(name))
+
+        const position = document.getElementById('message-form')
+        position.scrollIntoView({ behavior: 'smooth' });
+    }
     return (
         <MapContainer center={center} zoom={zoom} style={{height: '100%', width: '100%'}}>
             <TileLayer
@@ -31,7 +38,7 @@ const Leaflet = () => {
                         <Popup style={{width: '100%'}}>
                             <p>{`Plot Number: ${plot.properties?.Plot_No} ${plot.properties?.Street_Nam}`}</p>
                             <div style={{padding: '15px'}}>
-                                <button className='btn btn-primary shadow-sm' style={{alignSelf: 'center', marginTop: '10px', marginLeft: '10px', paddingTop: '6px', paddingBottom: '6px', paddingRight: '10px', paddingLeft: '10px', fontSize: '16px', borderRadius: '10px', border: 'none',}}>
+                                <button onClick={() => handleGetPlotName(plot._id)} className='btn btn-primary shadow-sm' style={{alignSelf: 'center',  marginLeft: '10px', paddingTop: '6px', paddingBottom: '6px', paddingRight: '10px', paddingLeft: '10px', fontSize: '16px', borderRadius: '10px', border: 'none',}}>
                                     Buy or Reserve
                                 </button>
                             </div>
