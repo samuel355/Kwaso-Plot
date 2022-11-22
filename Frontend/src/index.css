@@ -1251,3 +1251,17 @@ li {
     background-color: #7450fe;
     color: #fff;
 }
+
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+    background-color: transparent !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 500;
+    font-size: 16;
+}
