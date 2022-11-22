@@ -4,6 +4,7 @@ const asyncHandler = require('express-async-handler')
 const generateToken = require('../utils/generateToken.js')
 const protect = require('../Middleware/AuthMiddleware.js')
 const bcrypt = require('bcryptjs')
+const nodemailer = require('nodemailer')
 
 const userRouter = express.Router()
 
@@ -171,5 +172,37 @@ userRouter.get('/users/try-search', protect, asyncHandler(async(req, res) => {
     }
 
 }))
+
+//SEND MAIL
+userRouter.post('/sendmail', asyncHandler(async(req, res) => {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'addsamuel355@gmail.com',
+          pass: 'ljhxurlbacagrtuc'
+        }
+    });
+
+    var mailOptions = {
+        from: 'addsamuel355@gmail.com',
+        to: req.body.email,
+        subject: 'Plot Sending Email',
+        html: '<h1>Welcome</h1><p>That was easy!</p>'
+    };
+
+    try {
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+                res.status(200).send(info.response)
+              console.log('Email sent: ' + info.response);
+            }
+        });
+    } catch (error) {
+        res.status(404).send(error)
+    }
+}))
+
 
 module.exports = userRouter;
