@@ -2,21 +2,21 @@ import React from 'react'
 
 const Hero = () => {
     return (
-        <div class="hero-wrap ftco-degree-bg" style={{backgroundImage: 'url("images/bg_1.jpg")'}} data-stellar-background-ratio="0.5">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row no-gutters slider-text justify-content-center align-items-center">
-                    <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
-                        <div class="text text-center">
-                        <h1 class="mb-4">The Simplest <br />Way to Find Property</h1>
+        <div className="hero-wrap ftco-degree-bg" style={{backgroundImage: 'url("images/bg_1.jpg")'}} data-stellar-background-ratio="0.5">
+            <div className="overlay"></div>
+            <div className="container">
+                <div className="row no-gutters slider-text justify-content-center align-items-center">
+                    <div className="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
+                        <div className="text text-center">
+                        <h1 className="mb-4">The Simplest <br />Way to Find Property</h1>
                         <p style={{fontSize: '18px'}}>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts</p>
-                        <form action="#" class="search-location mt-md-5">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-10 align-items-end">
-                                        <div class="form-group">
-                                            <div class="form-field">
-                                        <input type="text" class="form-control" placeholder="Search location" />
-                                        <button><span class="ion-ios-search"></span></button>
+                        <form action="#" className="search-location mt-md-5">
+                                <div className="row justify-content-center">
+                                    <div className="col-lg-10 align-items-end">
+                                        <div className="form-group">
+                                            <div className="form-field">
+                                        <input type="text" className="form-control" placeholder="Search location" />
+                                        <button><span className="ion-ios-search"></span></button>
                                         </div>
                                     </div>
                                     </div>
@@ -26,9 +26,9 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-            <div class="mouse">
-                <a href="#1" class="mouse-icon">
-                    <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
+            <div className="mouse">
+                <a href="#1" className="mouse-icon">
+                    <div className="mouse-wheel"><span className="ion-ios-arrow-round-down"></span></div>
                 </a>
             </div>
         </div>
