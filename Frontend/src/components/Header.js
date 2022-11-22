@@ -3,7 +3,7 @@ import React from 'react'
 const Header = () => {
     return (
         <>
-            <header class="header_area bg-dark" style={{opacity: 0.5}} id="header">
+            <header class="header_area bg-dark" style={{opacity: 0.5, zIndex: 999}} id="header">
                 <div class="container-fluid h-100">
                     <div class="row h-100">
                         <div class="col-12 h-100">

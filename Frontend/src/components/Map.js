@@ -1,4 +1,5 @@
 import React from 'react'
+import Leaflet from './Leaflet'
 
 const Map = () => {
   return (
@@ -16,7 +17,9 @@ const Map = () => {
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div style={{width: '100%', height: '625px', backgroundColor: 'grey'}} id="map"></div>
+                    <div style={{width: '100%', height: '625px', backgroundColor: 'grey'}} id="map">
+                        <Leaflet />
+                    </div>
                 </div>
             </div> <br />
 
