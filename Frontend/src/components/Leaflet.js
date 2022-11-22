@@ -24,7 +24,7 @@ const Leaflet = () => {
             />
             {
                 plots && plots.map((plot) => (
-                    <Polygon positions={plot.geometry.coordinates} fillOpacity={0.8} fillColor="red" pathOptions={{color:'blue'}}>
+                    <Polygon key={plot._id} positions={plot.geometry.coordinates} fillOpacity={0.8} fillColor="red" pathOptions={{color:'blue'}}>
                         <Popup>
                             {`Plot Number: ${plot.properties?.Plot_No} ${plot.properties?.Street_Nam}`}
                             <button></button>
