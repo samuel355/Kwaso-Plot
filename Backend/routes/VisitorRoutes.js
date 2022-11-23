@@ -2,6 +2,9 @@ const express = require('express')
 const asyncHandler = require('express-async-handler')
 const VisitorModel = require('../models/VisitorModel.js')
 const nodemailer = require('nodemailer')
+const handlebars = require('handlebars')
+const fs = require('fs')
+const path = require('path')
 
 const visitorRouter = express.Router()
 
@@ -9,6 +12,15 @@ visitorRouter.post('/interests', asyncHandler(async(req, res) => {
     const {fullname, email, country, phone, address, option, plotDetails} = req.body
 
     //Email 
+    const filePath = path.join(__dirname, '../emails/main.html');
+    const source = fs.readFileSync(filePath, 'utf-8').toString();
+    const template = handlebars.compile(source);
+    const replacements = {
+        fullname: fullname
+    };
+
+    const htmlToSend = template(replacements);
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -21,7 +33,7 @@ visitorRouter.post('/interests', asyncHandler(async(req, res) => {
         from: 'addsamuel355@gmail.com',
         to: email,
         subject: 'Plot Sending Email',
-        html: '<h1>Thank you for your interest in our plots</h1><p>That was easy!</p>'
+        html: htmlToSend
     };
 
     try {
