@@ -1,8 +1,10 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {Link} from 'react-router-dom'
+import { logout } from '../redux/features/UserSlice'
 
 const Header = () => {
+    const dispatch = useDispatch()
     const {user, loading, error} = useSelector((state) => ({...state.user}))
     return (
         <>
@@ -36,7 +38,7 @@ const Header = () => {
                                         </li>
                                         {
                                             user && (
-                                                <li className="nav-item">
+                                                <li className="nav-item" onClick={() => dispatch(logout())}>
                                                     <Link className="nav-link">Logout</Link>
                                                 </li>
                                             )

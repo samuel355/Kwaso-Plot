@@ -23,7 +23,11 @@ const userSlice = createSlice({
     },
 
     reducers: {
-
+        logout: (state, action) => {
+            state.user = null;
+            localStorage.removeItem('user');
+            document.location.reload();
+        }
     },
 
     // Fetching Plots Cycle
@@ -43,5 +47,7 @@ const userSlice = createSlice({
         })
     }
 })
+
+export const {logout} = userSlice.actions;
 
 export default userSlice.reducer; 
