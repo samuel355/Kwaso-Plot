@@ -61,6 +61,11 @@ const Map = () => {
 
         dispatch(submitInterest({formValue, toast}))
         setFullname('')
+        setEmail('')
+        setAddress('')
+        setCountry('')
+        setPhone('')
+        plotDetails = ''
     }
 
   return (
