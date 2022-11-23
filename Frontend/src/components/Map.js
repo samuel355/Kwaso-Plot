@@ -20,6 +20,9 @@ const Map = () => {
         if(fullname === ''){
             return toast.error('Please enter your full name')
         }
+        if(email === ''){
+            return toast.error('Please enter your email address')
+        }
         if(address === ''){
             return toast.error('Please enter your Residential Address')
         }
