@@ -1,6 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import {Link} from 'react-router-dom'
 
 const Header = () => {
+    const {user, loading, error} = useSelector((state) => ({...state.user}))
     return (
         <>
             <header className="header_area bg-dark" style={{opacity: 0.5, zIndex: 999}} id="header">
@@ -10,7 +13,7 @@ const Header = () => {
                             <nav className="h-100 navbar navbar-expand-lg align-items-center">
                                 <a className="navbar-brand" href="/">L.H.C.</a>
                                 <button style={{border: 'none'}} className="navbar-toggler" type="button" data-toggle="collapse" data-target="#fancyNav" aria-controls="fancyNav" aria-expanded="false" aria-label="Toggle navigation"> 
-                                <i className=" text-white fa fa-duotone fa-bars"></i>
+                                    <i className=" text-white fa fa-duotone fa-bars"></i>
                                 </button>
                                 <div className="collapse navbar-collapse" id="fancyNav">
                                     <ul className="navbar-nav ml-auto">
@@ -23,16 +26,6 @@ const Header = () => {
                                         <li className="nav-item">
                                             <a className="nav-link" href="plots.php">Our Plots</a>
                                         </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="about.php">About </a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="team.php">Our Team</a>
-                                        </li>
-                                        
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="gallery.php">Gallery</a>
-                                        </li>
                                         <li className="nav-item dropdown">
                                             <a className="nav-link dropdown-toggle" href="#1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -41,9 +34,13 @@ const Header = () => {
                                                 <a className="dropdown-item" href="#4">Diaspora Dream Project</a>
                                             </div>
                                         </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="contact.php">Contact</a>
-                                        </li>
+                                        {
+                                            user && (
+                                                <li className="nav-item">
+                                                    <Link className="nav-link">Logout</Link>
+                                                </li>
+                                            )
+                                        }
                                     </ul>
                                 </div>
                             </nav>

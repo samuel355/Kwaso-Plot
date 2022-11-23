@@ -9,7 +9,6 @@ export const getPlots = createAsyncThunk("/tours", async (_, {rejectWithValue}) 
     } catch (error) {
         console.log(error)
         return rejectWithValue(error.response.data)
-
     }
 })
 
