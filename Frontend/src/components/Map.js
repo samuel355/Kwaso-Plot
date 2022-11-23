@@ -8,6 +8,7 @@ const Map = () => {
     const dispatch = useDispatch()
 
     const { plotName} = useSelector((state) => ({...state.plot}))
+
     let plotDetails = plotName
     const [fullname, setFullname] = useState('')
     const [email, setEmail] = useState('')

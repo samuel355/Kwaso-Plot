@@ -9,6 +9,7 @@ const Leaflet = () => {
 
     const dispatch = useDispatch()
     const {plots} = useSelector((state) => ({...state.plot}))
+    const { user} = useSelector((state) => ({...state.user}))
 
     const center = [6.7588644098723805, -1.4987540245056152]
     const zoom = 17
@@ -40,6 +41,13 @@ const Leaflet = () => {
                                 <button onClick={() => handleGetPlotName(plot._id)} className='btn btn-primary shadow-sm' style={{alignSelf: 'center',  marginLeft: '10px', paddingTop: '6px', paddingBottom: '6px', paddingRight: '10px', paddingLeft: '10px', fontSize: '16px', borderRadius: '10px', border: 'none',}}>
                                     Buy or Reserve
                                 </button>
+                                {
+                                    user && (
+                                        <button className='btn btn-primary shadow-sm' style={{alignSelf: 'center',  marginLeft: '10px', paddingTop: '6px', paddingBottom: '6px', paddingRight: '10px', paddingLeft: '10px', fontSize: '16px', borderRadius: '10px', border: 'none',}}>
+                                            Edit Plot
+                                        </button>
+                                    )
+                                }
                             </div>
                         </Popup>
                     </Polygon>
