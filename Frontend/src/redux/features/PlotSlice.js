@@ -48,7 +48,7 @@ const plotSlice = createSlice({
             state.loading = false;
             state.error = action.payload.message
           })
-      }
+    }
 })
 
 export const {getPlotName} = plotSlice.actions

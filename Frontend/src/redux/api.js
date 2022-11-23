@@ -6,3 +6,6 @@ const API = axios.create({
 
 //Get all Plots
 export const getAllPlots = () => API.get('/plots')
+
+//Visitor send interests 
+export const sendInterest = (formValue) => API.post('/interests', formValue)

@@ -52,8 +52,8 @@ visitorRouter.post('/interests', asyncHandler(async(req, res) => {
                 if (error) {
                   console.log(error);
                 } else {
+                    res.json({message: 'Thank you for your message, kindly check your email box or spam box for the necessary action'})
                     res.status(200).send(info.response)
-                    res.json({message: 'Thank you for your message, kindly check your email for the necessary action'})
                     console.log('Email sent: ' + info.response);
                 }
             });

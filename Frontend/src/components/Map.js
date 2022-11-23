@@ -1,9 +1,12 @@
 import {toast} from 'react-toastify'
 import { useState } from 'react'
 import Leaflet from './Leaflet'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { submitInterest } from '../redux/features/VisitorSlice'
 
 const Map = () => {
+    const dispatch = useDispatch()
+
     const { plotName} = useSelector((state) => ({...state.plot}))
     let plotDetails = plotName
     const [fullname, setFullname] = useState('')
@@ -13,6 +16,15 @@ const Map = () => {
     const [phone, setPhone] = useState('')
     const [option, setOption] = useState('')
 
+    let formValue = {
+        fullname,
+        email,
+        address,
+        country,
+        phone,
+        option,
+        plotDetails
+    }
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
@@ -47,6 +59,8 @@ const Map = () => {
             return toast.error('Select the plot you wan to buy or reserve on the map ')
         }
 
+        dispatch(submitInterest({formValue, toast}))
+        setFullname('')
     }
 
   return (
