@@ -40,6 +40,8 @@ const Login = () => {
     return (
         <div className='container'>
             <div className="row mx-auto p-5 w-[30rem] md:w-[40rem]">
+                {loading && (<i className="fa fa-spinner m-auto mb-4 text-3xl spinner"></i>)}
+                
                 <div className=" w-full" style={{margin: 'auto'}}>
                     <form className="form" onSubmit={loginHandler}>
                         <div className="form-group">
