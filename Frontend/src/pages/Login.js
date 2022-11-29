@@ -31,6 +31,12 @@ const Login = () => {
         }
     }, [error])
 
+    useEffect(() =>{
+        if(user){
+            navigate('/')
+        }
+    }, [user, navigate])
+
     return (
         <div className='container'>
             <div className="row p-5">
@@ -45,7 +51,7 @@ const Login = () => {
                             <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control p-2" />
                         </div>
                         <div className="form-group text-center">
-                            <button type='submit' className="btn btn-primary"> Login </button>
+                            <button type='submit' className="btn border border-gray-800 text-gray-700"> Login </button>
                         </div>
                     </form>
                 </div>

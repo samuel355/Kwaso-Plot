@@ -98,7 +98,7 @@ const Map = () => {
                             <p className="text-center" style={{fontSize: 'large', fontWeight: '400'}} id="filll">Choose an
                                 available plot, fill out the form and send us a message either buying or reserving. </p>
                         </div>
-                        <div className="contact-form">
+                        <div className="contact-form md:mx-[5rem]">
                             <form onSubmit={handleFormSubmit} id="message-form">
 
                                 <div className="contact_input_area">
