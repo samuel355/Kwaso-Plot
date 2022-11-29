@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Header from './components/Header';
 import Login from './pages/Login';
+import Edit from './pages/Edit';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/edit/:id' element={<Edit />} />
       </Routes>
     </BrowserRouter>
   );

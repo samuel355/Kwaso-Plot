@@ -1,12 +1,13 @@
 import React, { useEffect} from 'react'
 import { MapContainer, TileLayer, Popup, Polygon, Polyline, } from 'react-leaflet'
 import "leaflet/dist/leaflet.css";
+import { useNavigate, Link } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import { getPlots, getPlotName} from '../redux/features/PlotSlice';
 import PlotInner from './PlotInner';
 
 const Leaflet = () => {
-
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const {plots} = useSelector((state) => ({...state.plot}))
     const { user} = useSelector((state) => ({...state.user}))
@@ -43,9 +44,9 @@ const Leaflet = () => {
                                 </button>
                                 {
                                     user && (
-                                        <button className='btn btn-primary shadow-sm' style={{alignSelf: 'center',  marginLeft: '10px', paddingTop: '6px', paddingBottom: '6px', paddingRight: '10px', paddingLeft: '10px', fontSize: '16px', borderRadius: '10px', border: 'none',}}>
+                                        <Link to={`/edit/${plot._id}`} className='btn btn-primary shadow-sm text-gray-200' style={{alignSelf: 'center',  marginLeft: '10px', paddingTop: '6px', paddingBottom: '6px', paddingRight: '10px', paddingLeft: '10px', fontSize: '16px', borderRadius: '10px', border: 'none', color: 'white'}}>
                                             Edit Plot
-                                        </button>
+                                        </Link>
                                     )
                                 }
                             </div>
