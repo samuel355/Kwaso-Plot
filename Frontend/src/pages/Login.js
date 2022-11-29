@@ -39,8 +39,8 @@ const Login = () => {
 
     return (
         <div className='container'>
-            <div className="row p-5">
-                <div className="col-6" style={{width: '480px', margin: 'auto'}}>
+            <div className="row mx-auto p-5 w-[30rem] md:w-[40rem]">
+                <div className=" w-full" style={{margin: 'auto'}}>
                     <form className="form" onSubmit={loginHandler}>
                         <div className="form-group">
                             <label htmlFor="email" className="label">Email</label>
@@ -48,7 +48,7 @@ const Login = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="Password" className="label">Password</label>
-                            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control p-2" />
+                            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control p-2 w-full" />
                         </div>
                         <div className="form-group text-center">
                             <button type='submit' disabled={loading ? true : false} className="btn border border-gray-800 text-gray-700"> Login </button>

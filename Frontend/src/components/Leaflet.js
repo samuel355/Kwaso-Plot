@@ -1,13 +1,12 @@
 import React, { useEffect} from 'react'
 import { MapContainer, TileLayer, Popup, Polygon, Polyline, } from 'react-leaflet'
 import "leaflet/dist/leaflet.css";
-import { useNavigate, Link } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import { getPlots, getPlotName} from '../redux/features/PlotSlice';
 import PlotInner from './PlotInner';
 
 const Leaflet = () => {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const {plots} = useSelector((state) => ({...state.plot}))
     const { user} = useSelector((state) => ({...state.user}))

@@ -26,7 +26,7 @@ const userSlice = createSlice({
         logout: (state, action) => {
             state.user = null;
             localStorage.removeItem('user');
-            document.location.reload();
+            document.location.href('/');
         }
     },
 
