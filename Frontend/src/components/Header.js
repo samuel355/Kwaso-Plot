@@ -48,13 +48,9 @@ const Header = () => {
                             {
                                 user && (
                                     <div class="flex space-x-4">
-                                        <Link class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</Link>
-
-                                        <Link class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</Link>
-
-                                        <Link class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</Link>
-
-                                        <Link class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</Link>
+                                        <Link class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Plots</Link>
+                                        <Link class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Potential Clients</Link>
+                                        <Link class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Users</Link>
                                     </div>
                                 )
                             }
@@ -90,7 +86,7 @@ const Header = () => {
                         <div class="sm:hidden transition ease-out duration-100" id="mobile-menu">
                             <div class="space-y-1 px-2 pt-2 pb-3">
 
-                                <Link class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Clients</Link>
+                                <Link class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Potential Clients</Link>
 
                                 <Link class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Plots</Link>
 
