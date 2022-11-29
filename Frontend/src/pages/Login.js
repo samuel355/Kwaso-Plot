@@ -51,7 +51,7 @@ const Login = () => {
                             <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control p-2" />
                         </div>
                         <div className="form-group text-center">
-                            <button type='submit' className="btn border border-gray-800 text-gray-700"> Login </button>
+                            <button type='submit' disabled={loading ? true : false} className="btn border border-gray-800 text-gray-700"> Login </button>
                         </div>
                     </form>
                 </div>
