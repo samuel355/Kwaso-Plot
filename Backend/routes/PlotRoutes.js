@@ -59,7 +59,6 @@ plotRouter.get('/plots/:id', protect, asyncHandler(async(req, res) => {
     }
 }))
 
-
 //UPDATE PLOT
 plotRouter.put('/plot/update/:id', protect, asyncHandler(async(req, res) => {
 

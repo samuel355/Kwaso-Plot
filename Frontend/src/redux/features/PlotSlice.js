@@ -12,6 +12,18 @@ export const getPlots = createAsyncThunk("/tours", async (_, {rejectWithValue}) 
     }
 })
 
+export const getPlot = createAsyncThunk("/plots/:id", async (id, {rejectWithValue}) => {
+    try {
+        const response = await api.plot(id)
+        return response.data;
+
+    } catch (error) {
+        console.log(error)
+        return rejectWithValue(error.response.data)
+
+    }
+})
+
 const plotSlice = createSlice({
     name: 'plot',
     initialState: {
@@ -47,7 +59,22 @@ const plotSlice = createSlice({
             state.loading = false;
             state.error = action.payload.message
           })
+
+        //Single Plot Cycle
+        builder
+            .addCase(getPlot.pending, (state, action) => {
+            state.loading = true;
+        })
+        .addCase(getPlot.fulfilled, (state, action) => {
+            state.loading = false;
+            state.plot = action.payload;
+        })
+        .addCase(getPlot.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload.message;
+        })
     }
+
 })
 
 export const {getPlotName} = plotSlice.actions
