@@ -66,9 +66,8 @@ plotRouter.put('/plot/update/:id', protect, asyncHandler(async(req, res) => {
 
     try {
         if (plot) {
-            plot.properties.Name = req.body.name || plot.properties.Name 
-            plot.properties.Phone = req.body.phone || plot.properties.Phone 
             plot.properties.Status = req.body.status || plot.properties.Status
+            plot.client = req.body.clientDetails || plot.client
             
             const updatedPlot = await plot.save()
             res.json(updatedPlot)

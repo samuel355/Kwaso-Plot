@@ -7,14 +7,17 @@ import { getPlot } from '../redux/features/PlotSlice'
 const Edit = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
+    const {plot, loading, error} = useSelector((state) => ({...state.plot}))
+
     const [plotStatus, setPlotStatus] = useState('')
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [address, setAddress] = useState('')
     const [phone, setPhone] = useState('')
     const [agent, setAgent] = useState('')
-    const {plot, loading, error} = useSelector((state) => ({...state.plot}))
-    
+    const [totalAmount, setTotalAmount] = useState(plot.client.totalAmount || 0)
+    const [paidAmount, setPaidAmount] = useState(plot.client.paidAmount || 0)
+    const [remainingAmount, setRemainingAmount] = useState(plot.client.remainingAmount || 0)
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -35,7 +38,7 @@ const Edit = () => {
             <div className="col-12">
                 <div className="contact-form-area">
                     <div className="section-heading">
-                        <h2 className='text-center mt-7'>EDIT PLOT</h2>
+                        <h2 className='text-center mt-7 font-weight-medium'>UPDATE PLOT</h2>
                     </div>
                     {loading && (
                         <>
@@ -65,30 +68,33 @@ const Edit = () => {
                                     <div className="col-12">
                                         <div className="form-group">
                                             <label className='text-lg' htmlFor="plot_status">Plot Status</label>
-                                            <select value={plotStatus} onChange={(e) => setPlotStatus(e.target.value)} className="form-control text-dark my-4 pl-2" name="countryCode" id="countryCode">
+                                            <select value={plotStatus} onChange={(e) => setPlotStatus(e.target.value)} className="form-control text-dark my-4 pl-2 py-2" name="countryCode" id="countryCode">
                                                 <option value="green">Available</option>
                                                 <option value="red">Sold</option>
                                                 <option value="black">Reserve</option>
                                             </select>
                                         </div>
                                     </div>
-
+                                    <hr className='w-full h-1 bg-slate-600 mt-5 mb-7' />
                                     <>
                                         <div className="col-12 my-4">
                                             <div className="form-group">
-                                                <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} className="form-control pl-2 text-dark" name="email" id="email"
+                                                <label className='text-lg' htmlFor="plot_status">Full Name</label>
+                                                <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} className="form-control pl-2 text-dark mt-2" name="email" id="email"
                                                     placeholder="Client Full Name" />
                                             </div>
                                         </div>
 
                                         <div className="col-12 my-4">
                                             <div className="form-group">
-                                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control pl-2 text-dark" name="email" id="email"
+                                                <label className='text-lg' htmlFor="plot_status">Email</label>
+                                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control pl-2 text-dark mt-2" name="email" id="email"
                                                     placeholder="Email" />
                                             </div>
                                         </div>
                                         <div className="col-12 mt-5">
                                             <div className="form-group">
+                                                <label className='text-lg' htmlFor="plot_status">Address</label>
                                                 <input value={address} onChange={(e) => setAddress(e.target.value)} type="text" className="form-control pl-2 text-dark" name="address" id="email"
                                                     placeholder="Residential Address" />
                                             </div>
@@ -96,14 +102,33 @@ const Edit = () => {
                                         
                                         <div className="col-12 mt-5">
                                             <div className="form-group">
+                                                <label className='text-lg' htmlFor="plot_status">Phone</label>
                                                 <input value={phone} onChange={(e) => setPhone(e.target.value)} type="number" className="form-control pl-2 text-dark" name="phone" id="email"
                                                     placeholder="Phone Number" />
                                             </div>
                                         </div>
                                         <div className="col-12 mt-5">
                                             <div className="form-group">
+                                                <label className='text-lg' htmlFor="plot_status">Agent Name</label>
                                                 <input value={agent} onChange={(e) => setAgent(e.target.value)} type="text" className="form-control text-dark pl-2" name="phone" id="email"
                                                     placeholder="Agent Name" />
+                                            </div>
+                                        </div>
+                                        <div className="col-12 mt-5 gap-6 lg:flex items-center justify-between">
+                                            <div className="form-group">
+                                                <label className='text-lg' htmlFor="plot_status">Total Amount</label>
+                                                <input value={totalAmount} onChange={(e) => setTotalAmount(e.target.value)} type="text" className="form-control text-dark pl-2 mt-2" name="phone" id="email"
+                                                    placeholder="Total Amount" />
+                                            </div>
+                                            <div className="form-group my-5">
+                                                <label className='text-lg' htmlFor="plot_status">Amount Paid</label>
+                                                <input value={paidAmount} onChange={(e) => setPaidAmount(e.target.value)} type="text" className="form-control text-dark pl-2 mt-2" name="phone" id="email"
+                                                    placeholder="Amount Paid" />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='text-lg' htmlFor="plot_status">Amount Remaining</label>
+                                                <input value={remainingAmount} onChange={(e) => setRemainingAmount(e.target.value)} type="text" className="form-control text-dark pl-2 mt-2" name="phone" id="email"
+                                                    placeholder="Amount Remaining" />
                                             </div>
                                         </div>
                                     </>
