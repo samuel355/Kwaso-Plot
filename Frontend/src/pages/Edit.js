@@ -15,9 +15,9 @@ const Edit = () => {
         address: '',
         phone: '',
         agent: '',
-        totalAmount: null,
-        paidAmount: null,
-        remainingAmount: null,
+        totalAmount: 0,
+        paidAmount: 0,
+        remainingAmount: 0,
     }
     const { id } = useParams()
 
@@ -34,7 +34,7 @@ const Edit = () => {
     phone = plot.client?.phone
     address = plot.client?.address
     agent = plot.client?.agent
-    totalAmount = plot.client?.totalAmount 
+    totalAmount = plot.client?.totalAmount
     paidAmount = plot.client?.paidAmount
     remainingAmount = plot.client?.remainingAmount
 
@@ -50,10 +50,13 @@ const Edit = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-
-        // if(totalAmount < paidAmount && totalAmount === 0){
-        //   return toast.error('Check the total amount and the paid amount well');
-        // }
+        if(plotInfo.plotStatus === ''){
+            return toast.error('Please select plot Status');
+        }
+        if(plotInfo.totalAmount === 0 && plotInfo.paidAmount === 0 && plotInfo.totalAmount === 0){
+           return toast.error('Check the total amount and the paid amount well');
+        }
+        console.log(plotInfo)
 
         // if(plotStatus !== '' && phone !== '' && fullName !== ''){
         //     const status = plotStatus;
@@ -81,7 +84,7 @@ const Edit = () => {
 
     const handleChange = (e) => {
         // create the new state and set it
-        setPlotInfo((prev )=> ({ prev, [e.target.name]: e.target.value }))
+        setPlotInfo((prev )=> ({ ...prev, [e.target.name]: e.target.value }))
 
         e.preventDefault()
     }
@@ -124,12 +127,11 @@ const Edit = () => {
                                             <div className="col-12">
                                                 <div className="form-group">
                                                     <label className='text-lg' htmlFor="plot_status">Plot Status</label>
-                                                    <select value={plotStatus} onChange={handleChange} className="form-control text-dark my-4 px-2 py-2">
-                                                        <option value=''>Select Plot Status</option>
+                                                    <select name='plotStatus' onChange={handleChange} className="form-control text-dark my-4 px-2 py-2">
+                                                        <option defaultChecked value=''>Select Plot Status</option>
                                                         <option value="Sold">Sold</option>
                                                         <option value="Reserved">Reserve</option>
                                                         <option value="Available">Available</option>
-                                                        <option selected  value={plotStatus}>{plotStatus}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -154,7 +156,7 @@ const Edit = () => {
                                                 <div className="col-12 mt-5">
                                                     <div className="form-group">
                                                         <label className='text-lg' htmlFor="plot_status">Address</label>
-                                                        <input value={address} onChange={handleChange} type="text" className="form-control pl-2 text-dark" name="address" id="email"
+                                                        <input value={address} onChange={handleChange} type="text" className="form-control pl-2 text-dark" name="address"
                                                             placeholder="Residential Address" />
                                                     </div>
                                                 </div>
@@ -162,32 +164,32 @@ const Edit = () => {
                                                 <div className="col-12 mt-5">
                                                     <div className="form-group">
                                                         <label className='text-lg' htmlFor="plot_status">Phone</label>
-                                                        <input value={phone} onChange={handleChange} type="number" className="form-control pl-2 text-dark" name="phone" id="email"
+                                                        <input value={phone} name="phone" onChange={handleChange} type="number" className="form-control pl-2 text-dark"
                                                             placeholder="Phone Number" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 mt-5">
                                                     <div className="form-group">
                                                         <label className='text-lg' htmlFor="plot_status">Agent Name</label>
-                                                        <input value={agent} onChange={handleChange} type="text" className="form-control text-dark pl-2" name="phone" id="email"
+                                                        <input name="agent" value={agent} onChange={handleChange} type="text" className="form-control text-dark pl-2"
                                                             placeholder="Agent Name" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 mt-5 gap-2 lg:flex items-center justify-between">
                                                     <div className="form-group">
                                                         <label className='text-lg' htmlFor="plot_status">Total Amount</label>
-                                                        <input value={totalAmount} onChange={handleChange} type="text" className="form-control text-dark pl-2 mt-2" name="phone" id="email"
-                                                            placeholder="Total Amount" />
+                                                        <input name="totalAmount" value={totalAmount} placeholder='Total Amount' onChange={handleChange} type="number" className="form-control text-dark pl-2 mt-2"
+                                                            />
                                                     </div>
                                                     <div className="form-group my-5">
                                                         <label className='text-lg' htmlFor="plot_status">Amount Paid</label>
-                                                        <input value={paidAmount} onChange={handleChange} type="text" className="form-control text-dark pl-2 mt-2" name="phone" id="email"
-                                                            placeholder="Amount Paid" />
+                                                        <input name="paidAmount" value={paidAmount} onChange={handleChange} placeholder='Paid Amount' type="number" className="form-control text-dark pl-2 mt-2"
+                                                             />
                                                     </div>
                                                     <div className="form-group">
                                                         <label className='text-lg' htmlFor="plot_status">Amount Remaining</label>
-                                                        <input value={remainingAmount} onChange={handleChange} type="text" className="form-control text-dark pl-2 mt-2 mb-4" name="phone" id="email"
-                                                            placeholder="Amount Remaining" />
+                                                        <input name='remainingAmount' value={remainingAmount} onChange={handleChange} placeholder='Remaining Amount' type="number" className="form-control text-dark pl-2 mt-2 mb-4"
+                                                            />
                                                     </div>
                                                 </div>
                                             </>
