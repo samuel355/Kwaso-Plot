@@ -39,8 +39,8 @@ export const updatePlot = createAsyncThunk("/plot/update", async ({id, status, c
 const plotSlice = createSlice({
   name: 'plot',
   initialState: {
-    plots: [],
     plot:{},
+    plots: [],
     plotName: '',
     loading: false,
     error: "",
@@ -68,6 +68,7 @@ const plotSlice = createSlice({
       .addCase(getPlots.fulfilled, (state, action) => {
         state.loading = false;
         state.plots = action.payload
+        state.plot = {}
       })
       .addCase(getPlots.rejected, (state, action) => {
         state.loading = false;

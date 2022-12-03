@@ -11,29 +11,32 @@ const Edit = () => {
         plotStatus: '',
         StreetName: '',
         fullName: '',
-        email: ''
+        email: '',
+        address: '',
+        phone: '',
+        agent: '',
+        totalAmount: null,
+        paidAmount: null,
+        remainingAmount: null,
     }
     const { id } = useParams()
 
     const dispatch = useDispatch()
     const [plotInfo, setPlotInfo] = useState(initialState)
     const {plot, loading, error} = useSelector((state) => ({...state.plot}))
-    let {plotNumber, plotStatus, streetName, fullName, email} = plotInfo;
+    let {plotNumber, plotStatus, streetName, fullName, email, phone, address, agent, totalAmount, paidAmount, remainingAmount} = plotInfo;
 
     plotNumber = plot.properties?.Plot_No
     streetName = plot.properties?.Street_Nam
     plotStatus = plot.properties?.Status
     fullName = plot.client?.fullName
     email = plot.client?.email
-
-    // const [fullName, setFullName] = useState(plot.client?.fullName || '')
-    // const [email, setEmail] = useState(plot.client?.email || '')
-    // const [address, setAddress] = useState(plot.client?.address || '')
-    // const [phone, setPhone] = useState(plot.client?.phone || '')
-    // const [agent, setAgent] = useState(plot.client?.agent || '')
-    // const [totalAmount, setTotalAmount] = useState(plot.client?.totalAmount || 0)
-    // const [paidAmount, setPaidAmount] = useState(plot.client?.paidAmount || 0)
-    // const [remainingAmount, setRemainingAmount] = useState(plot.client?.remainingAmount || 0)
+    phone = plot.client?.phone
+    address = plot.client?.address
+    agent = plot.client?.agent
+    totalAmount = plot.client?.totalAmount 
+    paidAmount = plot.client?.paidAmount
+    remainingAmount = plot.client?.remainingAmount
 
     useEffect(() => {
         dispatch(getPlot(id))
@@ -78,7 +81,7 @@ const Edit = () => {
 
     const handleChange = (e) => {
         // create the new state and set it
-        setPlotInfo((prev )=> ({ ...prev, [e.target.name]: e.target.value }))
+        setPlotInfo((prev )=> ({ prev, [e.target.name]: e.target.value }))
 
         e.preventDefault()
     }
@@ -148,10 +151,10 @@ const Edit = () => {
                                                             placeholder="Email" />
                                                     </div>
                                                 </div>
-                                                {/* <div className="col-12 mt-5">
+                                                <div className="col-12 mt-5">
                                                     <div className="form-group">
                                                         <label className='text-lg' htmlFor="plot_status">Address</label>
-                                                        <input value={address} onChange={(e) => setAddress(e.target.value)} type="text" className="form-control pl-2 text-dark" name="address" id="email"
+                                                        <input value={address} onChange={handleChange} type="text" className="form-control pl-2 text-dark" name="address" id="email"
                                                             placeholder="Residential Address" />
                                                     </div>
                                                 </div>
@@ -159,34 +162,34 @@ const Edit = () => {
                                                 <div className="col-12 mt-5">
                                                     <div className="form-group">
                                                         <label className='text-lg' htmlFor="plot_status">Phone</label>
-                                                        <input value={phone} onChange={(e) => setPhone(e.target.value)} type="number" className="form-control pl-2 text-dark" name="phone" id="email"
+                                                        <input value={phone} onChange={handleChange} type="number" className="form-control pl-2 text-dark" name="phone" id="email"
                                                             placeholder="Phone Number" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 mt-5">
                                                     <div className="form-group">
                                                         <label className='text-lg' htmlFor="plot_status">Agent Name</label>
-                                                        <input value={agent} onChange={(e) => setAgent(e.target.value)} type="text" className="form-control text-dark pl-2" name="phone" id="email"
+                                                        <input value={agent} onChange={handleChange} type="text" className="form-control text-dark pl-2" name="phone" id="email"
                                                             placeholder="Agent Name" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 mt-5 gap-2 lg:flex items-center justify-between">
                                                     <div className="form-group">
                                                         <label className='text-lg' htmlFor="plot_status">Total Amount</label>
-                                                        <input value={totalAmount} onChange={(e) => setTotalAmount(e.target.value)} type="text" className="form-control text-dark pl-2 mt-2" name="phone" id="email"
+                                                        <input value={totalAmount} onChange={handleChange} type="text" className="form-control text-dark pl-2 mt-2" name="phone" id="email"
                                                             placeholder="Total Amount" />
                                                     </div>
                                                     <div className="form-group my-5">
                                                         <label className='text-lg' htmlFor="plot_status">Amount Paid</label>
-                                                        <input value={paidAmount} onChange={(e) => setPaidAmount(e.target.value)} type="text" className="form-control text-dark pl-2 mt-2" name="phone" id="email"
+                                                        <input value={paidAmount} onChange={handleChange} type="text" className="form-control text-dark pl-2 mt-2" name="phone" id="email"
                                                             placeholder="Amount Paid" />
                                                     </div>
                                                     <div className="form-group">
                                                         <label className='text-lg' htmlFor="plot_status">Amount Remaining</label>
-                                                        <input value={remainingAmount} onChange={(e) => setRemainingAmount(e.target.value)} type="text" className="form-control text-dark pl-2 mt-2 mb-4" name="phone" id="email"
+                                                        <input value={remainingAmount} onChange={handleChange} type="text" className="form-control text-dark pl-2 mt-2 mb-4" name="phone" id="email"
                                                             placeholder="Amount Remaining" />
                                                     </div>
-                                                </div> */}
+                                                </div>
                                             </>
                                         
                                             <div className="col-12 text-center mt-5">
