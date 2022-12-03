@@ -38,12 +38,12 @@ const Leaflet = () => {
                         <Popup style={{width: '100%'}}>
                             <p>{`Plot Number: ${plot.properties?.Plot_No} ${plot.properties?.Street_Nam}`}</p>
                             <div style={{padding: '15px'}}>
-                                <button onClick={() => handleGetPlotName(plot._id)} className='btn btn-primary shadow-sm' style={{alignSelf: 'center',  marginLeft: '10px', paddingTop: '6px', paddingBottom: '6px', paddingRight: '10px', paddingLeft: '10px', fontSize: '16px', borderRadius: '10px', border: 'none',}}>
-                                    Buy or Reserve
-                                </button>
+                                <button onClick={() => handleGetPlotName(plot._id)} className='btn fancy-btn fancy-dark bg-transparent'>
+                                    BUY OR RESERVE
+                                </button> <br />
                                 {
                                     user && (
-                                        <Link to={`/edit/${plot._id}`} className='btn btn-primary shadow-sm text-gray-200' style={{alignSelf: 'center',  marginLeft: '10px', paddingTop: '6px', paddingBottom: '6px', paddingRight: '10px', paddingLeft: '10px', fontSize: '16px', borderRadius: '10px', border: 'none', color: 'white'}}>
+                                        <Link to={`/edit/${plot._id}`} className='btn fancy-btn fancy-dark bg-transparent mt-3'>
                                             Edit Plot
                                         </Link>
                                     )

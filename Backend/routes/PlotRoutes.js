@@ -100,7 +100,6 @@ plotRouter.get('/search', protect, asyncHandler(async(req, res) => {
         } else {
             res.status(404).json({message: 'No Plot found with your search'})
         }
-
     } catch (error) {
         res.status(401).json({message: 'Sorry Something went wrong, try again'})
         console.log(error)

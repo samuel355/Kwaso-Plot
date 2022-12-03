@@ -24,3 +24,6 @@ export const login = (formValue) => API.post('/login', formValue)
 
 //single plot
 export const plot = (id) => API.get(`/plots/${id}`)
+
+//Update Plot
+export const updatePlot = (id, status, clientDetails) => API.put(`/plot/update/${id}`, status, clientDetails)
