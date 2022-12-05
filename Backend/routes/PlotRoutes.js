@@ -1,7 +1,9 @@
+const mongoose = require('mongoose')
 const express = require('express')
 const PlotDetails = require('../Models/PlotDetails.js')
 const asyncHandler = require('express-async-handler')
 const protect = require('../Middleware/AuthMiddleware.js')
+
 
 const plotRouter = express.Router()
 
@@ -81,6 +83,39 @@ plotRouter.put('/plot/update/:id', protect, asyncHandler(async(req, res) => {
         console.log(error)
     }
 }))
+
+
+//UPDATE PLOT ALT
+plotRouter.patch('/plot/updates/:id', protect, asyncHandler(async(req, res) => {
+    const {id} = req.params;
+
+    try {
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            res.status(404).json({message: `This plot with this id: ${id} does not exist`})
+            console.log('error with id')
+        }
+        const plot = await PlotDetails.findById(id)
+
+        if (plot) {
+            const updatedPlot = {
+                status: req.body.status || plot.properties.Status,
+                client: req.body.clientDetails || plot.client,
+                _id: id
+            }
+            await PlotDetails.findByIdAndUpdate(id, updatedPlot, {new: true}).lean()
+            res.json(updatedPlot)
+
+        } else {
+            res.status(404).json({message: 'Plot not found'})
+        }
+
+    } catch (error) {
+        res.status(404).json({message: `Sorry Something went wrong`})
+        console.log(error)
+    }
+}))
+
+
 
 //SEARCH PLOT
 plotRouter.get('/search', protect, asyncHandler(async(req, res) => {

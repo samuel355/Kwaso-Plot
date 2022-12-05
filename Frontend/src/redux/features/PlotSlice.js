@@ -97,7 +97,7 @@ const plotSlice = createSlice({
       .addCase(updatePlot.fulfilled, (state, action) => {
         state.loading = false;
         //state.plot = action.payload
-        state.plot = state.plot.filter((item) => item._id !== action.payload)
+        //state.plot = state.plot.filter((item) => item._id !== action.payload)
         console.log(state.plot)
         console.log(action.payload)
         state.error = action.payload.message;
