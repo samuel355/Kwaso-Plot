@@ -96,10 +96,12 @@ const plotSlice = createSlice({
       })
       .addCase(updatePlot.fulfilled, (state, action) => {
         state.loading = false;
-        //state.plot = action.payload
-        //state.plot = state.plot.filter((item) => item._id !== action.payload)
-        console.log(state.plot)
-        console.log(action.payload)
+        const {arg: {id},} = action.meta
+        if(id){
+          state.plots = state.plots.map((item) => item._id === id ? action.payload : item)
+          console.log(action.payload)
+        }
+
         state.error = action.payload.message;
       })
       .addCase(updatePlot.rejected, (state, action) => {

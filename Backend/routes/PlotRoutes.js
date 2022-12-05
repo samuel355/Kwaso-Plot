@@ -63,7 +63,7 @@ plotRouter.get('/plots/:id', protect, asyncHandler(async(req, res) => {
 
 //UPDATE PLOT
 plotRouter.put('/plot/update/:id', protect, asyncHandler(async(req, res) => {
-
+    
     const plot = await PlotDetails.findById(req.params.id)
 
     try {
@@ -84,10 +84,10 @@ plotRouter.put('/plot/update/:id', protect, asyncHandler(async(req, res) => {
     }
 }))
 
-
 //UPDATE PLOT ALT
 plotRouter.patch('/plot/updates/:id', protect, asyncHandler(async(req, res) => {
     const {id} = req.params;
+    const {status, fullName, phone, email, address, agent, totalAmount, paidAmount, remainingAmount} = req.body;
 
     try {
         if(!mongoose.Types.ObjectId.isValid(id)){
@@ -97,13 +97,19 @@ plotRouter.patch('/plot/updates/:id', protect, asyncHandler(async(req, res) => {
         const plot = await PlotDetails.findById(id)
 
         if (plot) {
-            const updatedPlot = {
-                status: req.body.status || plot.properties.Status,
-                client: req.body.clientDetails || plot.client,
-                _id: id
-            }
-            await PlotDetails.findByIdAndUpdate(id, updatedPlot, {new: true}).lean()
-            res.json(updatedPlot)
+            plot.properties.Status = status || plot.properties.Status
+            plot.client.fulName = fullName || plot.client.fullName
+            plot.client.phone = phone || plot.client.phone
+            plot.client.email = email || plot.client.email
+            plot.client.address = address || plot.client.address
+            plot.client.agent = agent || plot.client.agent
+            plot.client.totalAmount = totalAmount || plot.client.totalAmount
+            plot.client.paidAmount = paidAmount || plot.client.paidAmount
+            plot.client.remainingAmount = remainingAmount || plot.client.remainingAmount
+
+            const newPlot = await plot.save()
+
+            res.status(200).json(newPlot)
 
         } else {
             res.status(404).json({message: 'Plot not found'})

@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import {useSelector, useDispatch} from 'react-redux'
-import { getPlot, updatePlot } from '../redux/features/PlotSlice'
+import { updatePlot } from '../redux/features/PlotSlice'
 
 const plotInfo= {
     status: '',
@@ -11,9 +11,9 @@ const plotInfo= {
     phone: '',
     address: '',
     agent: '',
-    totalAmount: 0,
-    paidAmount:  0,
-    remainingAmount: 0,
+    totalAmount: '',
+    paidAmount:  '',
+    remainingAmount: '',
 }
 const Edit = () => {
 
@@ -48,13 +48,44 @@ const Edit = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault();
+
+        if(status === ''){
+            return toast.error('Please select plot Status');
+        }
+
+        if(totalAmount === undefined && paidAmount === undefined && remainingAmount === undefined){
+            toast.error('Check the total amount, amount paying and the remaining amount')
+
+        }else if (fullName === undefined && phone === undefined){
+            toast.error('Add client Name and Phone number at least')
+        }else if(totalAmount === '' && paidAmount === '' && remainingAmount === ''){
+            toast.error('Check the total amount, amount paying and the remaining amount')
+        }else{
+            if(id){
+                dispatch(updatePlot({id, status, clientDetails, toast}))
+            }else{
+                toast.error('Something went wrong updating the plot. Try again later')
+            }
+        }
     }
 
-      const onInputChange = (e) => {
+    const clientDetails = {
+        fullName, 
+        email : email || '', 
+        address : address || '', 
+        phone, 
+        agent : agent || '', 
+        totalAmount,
+        paidAmount,
+        remainingAmount
+    }
+
+    const onInputChange = (e) => {
         e.preventDefault()
         const {name, value} = e.target
         setPlotData({...plotData, [name]: value});
     }
+
     return (
         <div className="row md:mx-28">
             <div className="col-12">
@@ -91,8 +122,8 @@ const Edit = () => {
                                     <div className="col-12">
                                         <div className="form-group">
                                             <label className='text-lg' htmlFor="plot_status">Plot Status</label>
-                                            <select name='status' onChange={onInputChange} className="form-control text-dark my-4 px-2 py-2">
-                                                <option selected value={status}>{status}</option>
+                                            <select name='status' value={status} onChange={onInputChange} className="form-control text-dark my-4 px-2 py-2">
+                                                <option value={status}>{status}</option>
                                                 <option value="Sold">Sold</option>
                                                 <option value="Reserved">Reserve</option>
                                                 <option value="Available">Available</option>
@@ -149,7 +180,7 @@ const Edit = () => {
                                             <div className="form-group my-5">
                                                 <label className='text-lg' htmlFor="plot_status">Amount Paid</label>
                                                 <input name="paidAmount" value={paidAmount} onChange={onInputChange} placeholder='Paid Amount' type="number" className="form-control text-dark pl-2 mt-2"
-                                                        />
+                                                />
                                             </div>
                                             <div className="form-group">
                                                 <label className='text-lg' htmlFor="plot_status">Amount Remaining</label>

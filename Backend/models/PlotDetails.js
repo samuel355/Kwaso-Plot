@@ -28,6 +28,7 @@ const PlotDetailSchema = mongoose.Schema({
         email: {type: String},
         address: {type: String},
         phone: {type: Number},
+        status: {type: String},
         agent: {type: String},
         totalAmount: {type: Number},
         paidAmount: {type: Number},
