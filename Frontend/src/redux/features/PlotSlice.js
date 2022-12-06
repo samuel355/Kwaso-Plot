@@ -24,9 +24,9 @@ export const getPlot = createAsyncThunk("/plots/plot", async (id, {rejectWithVal
 })
 
 //Update Plot
-export const updatePlot = createAsyncThunk("/plot/update", async ({id, status, toast, navigate}, {rejectWithValue}) => {
+export const updatePlot = createAsyncThunk("/plot/update", async ({id, toast, navigate, status, fullName, phone, email, address, agent, totalAmount, paidAmount, remainingAmount}, {rejectWithValue}) => {
   try {
-    const response = await api.updatePlot(id, status)
+    const response = await api.plotUpdate(id, {status, fullName, phone, email, address, agent, totalAmount, paidAmount, remainingAmount})
     navigate('/')
     toast.success('Plot Updated Successfully')
     return response.data;
@@ -98,10 +98,13 @@ const plotSlice = createSlice({
       .addCase(updatePlot.fulfilled, (state, action) => {
         state.loading = false;
         
-        const {arg: {id},} = action.meta
-        if(id){
-          state.plots = state.plots.map((item) => item._id === id ? action.payload : item)
-        }
+        // const {arg: {id},} = action.meta
+        // if(id){
+        //   state.plots = state.plots.map((item) => item._id === id ? action.payload : item)
+        // }
+
+        const plotIndex = state.plots.findIndex((plot)=> plot._id === action.payload._id);
+        state.plots[plotIndex] = action.payload;
 
         state.error = action.payload.message;
       })

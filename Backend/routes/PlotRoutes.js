@@ -97,7 +97,7 @@ plotRouter.patch('/plot/updates/:id', protect, asyncHandler(async(req, res) => {
 
         if (plotDetails) {
             plotDetails.properties.Status = req.body.status || plotDetails.properties.Status
-            plotDetails.client.fulName = req.body.fullName || plotDetails.client.fullName
+            plotDetails.client.fullName = req.body.fullName || plotDetails.client.fullName
             plotDetails.client.phone = req.body.phone || plotDetails.client.phone
             plotDetails.client.email = req.body.email || plotDetails.client.email
             plotDetails.client.address = req.body.address || plotDetails.client.address
@@ -119,7 +119,6 @@ plotRouter.patch('/plot/updates/:id', protect, asyncHandler(async(req, res) => {
         console.log(error)
     }
 }))
-
 
 
 //SEARCH PLOT

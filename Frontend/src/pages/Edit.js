@@ -63,7 +63,7 @@ const Edit = () => {
         }else{
             if(id){
                 //console.log({id, toast, status, fullName, phone, email, address, totalAmount, paidAmount, remainingAmount})
-                dispatch(updatePlot({id, toast, navigate, status, fullName, phone, email, address, totalAmount, paidAmount, remainingAmount}))
+                dispatch(updatePlot({id, toast, navigate, status, fullName, phone, email, address, agent, totalAmount, paidAmount, remainingAmount}))
             }else{
                 toast.error('Something went wrong updating the plot. Try again later')
             }
