@@ -26,4 +26,4 @@ export const login = (formValue) => API.post('/login', formValue)
 export const plot = (id) => API.get(`/plots/${id}`)
 
 //Update Plot
-export const updatePlot = (id, status, clientDetails) => API.patch(`/plot/updates/${id}`, status, clientDetails)
+export const updatePlot = (id, status) => API.patch(`plot/updates/${id}`, status)

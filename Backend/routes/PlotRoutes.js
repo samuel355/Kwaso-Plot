@@ -87,27 +87,26 @@ plotRouter.put('/plot/update/:id', protect, asyncHandler(async(req, res) => {
 //UPDATE PLOT ALT
 plotRouter.patch('/plot/updates/:id', protect, asyncHandler(async(req, res) => {
     const {id} = req.params;
-    const {status, fullName, phone, email, address, agent, totalAmount, paidAmount, remainingAmount} = req.body;
 
     try {
         if(!mongoose.Types.ObjectId.isValid(id)){
             res.status(404).json({message: `This plot with this id: ${id} does not exist`})
             console.log('error with id')
         }
-        const plot = await PlotDetails.findById(id)
+        const plotDetails = await PlotDetails.findById(id)
 
-        if (plot) {
-            plot.properties.Status = status || plot.properties.Status
-            plot.client.fulName = fullName || plot.client.fullName
-            plot.client.phone = phone || plot.client.phone
-            plot.client.email = email || plot.client.email
-            plot.client.address = address || plot.client.address
-            plot.client.agent = agent || plot.client.agent
-            plot.client.totalAmount = totalAmount || plot.client.totalAmount
-            plot.client.paidAmount = paidAmount || plot.client.paidAmount
-            plot.client.remainingAmount = remainingAmount || plot.client.remainingAmount
+        if (plotDetails) {
+            plotDetails.properties.Status = req.body.status || plotDetails.properties.Status
+            plotDetails.client.fulName = req.body.fullName || plotDetails.client.fullName
+            plotDetails.client.phone = req.body.phone || plotDetails.client.phone
+            plotDetails.client.email = req.body.email || plotDetails.client.email
+            plotDetails.client.address = req.body.address || plotDetails.client.address
+            plotDetails.client.agent = req.body.agent || plotDetails.client.agent
+            plotDetails.client.totalAmount = req.body.totalAmount || plotDetails.client.totalAmount
+            plotDetails.client.paidAmount = req.body.paidAmount || plotDetails.client.paidAmount
+            plotDetails.client.remainingAmount = req.body.remainingAmount || plotDetails.client.remainingAmount
 
-            const newPlot = await plot.save()
+            const newPlot = await plotDetails.save()
 
             res.status(200).json(newPlot)
 

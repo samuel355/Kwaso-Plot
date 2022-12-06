@@ -34,7 +34,7 @@ const Edit = () => {
 
     useEffect(() => {
         if(id){
-            const singlePlot = plots.find((plot) => plot._id === id)
+            const singlePlot = plots?.find((plot) => plot._id === id)
             setAllDetails({...singlePlot})
             setPlotData({...singlePlot?.client, status: singlePlot?.properties?.Status})
         }
@@ -62,22 +62,12 @@ const Edit = () => {
             toast.error('Check the total amount, amount paying and the remaining amount')
         }else{
             if(id){
-                dispatch(updatePlot({id, status, clientDetails, toast}))
+                //console.log({id, toast, status, fullName, phone, email, address, totalAmount, paidAmount, remainingAmount})
+                dispatch(updatePlot({id, toast, navigate, status, fullName, phone, email, address, totalAmount, paidAmount, remainingAmount}))
             }else{
                 toast.error('Something went wrong updating the plot. Try again later')
             }
         }
-    }
-
-    const clientDetails = {
-        fullName, 
-        email : email || '', 
-        address : address || '', 
-        phone, 
-        agent : agent || '', 
-        totalAmount,
-        paidAmount,
-        remainingAmount
     }
 
     const onInputChange = (e) => {

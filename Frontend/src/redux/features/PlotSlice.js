@@ -24,9 +24,10 @@ export const getPlot = createAsyncThunk("/plots/plot", async (id, {rejectWithVal
 })
 
 //Update Plot
-export const updatePlot = createAsyncThunk("/plot/update", async ({id, status, clientDetails, toast}, {rejectWithValue}) => {
+export const updatePlot = createAsyncThunk("/plot/update", async ({id, status, toast, navigate}, {rejectWithValue}) => {
   try {
-    const response = await api.updatePlot(id, clientDetails, status)
+    const response = await api.updatePlot(id, status)
+    navigate('/')
     toast.success('Plot Updated Successfully')
     return response.data;
     
@@ -96,10 +97,10 @@ const plotSlice = createSlice({
       })
       .addCase(updatePlot.fulfilled, (state, action) => {
         state.loading = false;
+        
         const {arg: {id},} = action.meta
         if(id){
           state.plots = state.plots.map((item) => item._id === id ? action.payload : item)
-          console.log(action.payload)
         }
 
         state.error = action.payload.message;
