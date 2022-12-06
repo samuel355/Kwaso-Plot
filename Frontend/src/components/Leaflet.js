@@ -24,6 +24,18 @@ const Leaflet = () => {
         const position = document.getElementById('message-form')
         position.scrollIntoView({ behavior: 'smooth' });
     }
+
+    const renderColor= (status) => {
+        if(status === 'Available'){
+            return 'green'
+        }
+        if(status === 'Sold'){
+            return'red'
+        }
+        if(status === 'Reserved'){
+            return 'black'
+        }
+    }
     return (
         <MapContainer center={center} zoom={zoom} style={{height: '100%', width: '100%'}}>
             <TileLayer
@@ -33,7 +45,7 @@ const Leaflet = () => {
 
             {
                 plots && plots.map((plot) => (
-                    <Polygon key={plot._id} positions={plot.geometry.coordinates} fillOpacity={0.8} fillColor="red" pathOptions={{color:'blue'}}>
+                    <Polygon key={plot._id} positions={plot.geometry.coordinates} fillOpacity={0.9}  pathOptions={{color: `${renderColor(plot.properties.Status)}`}}>
                         <PlotInner coord={plot.geometry.coordinates} plot_number={plot.properties.Plot_No} />   
                         <Popup style={{width: '100%'}}>
                             <p>{`Plot Number: ${plot.properties?.Plot_No} ${plot.properties?.Street_Nam}`}</p>
