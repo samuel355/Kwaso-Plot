@@ -113,7 +113,6 @@ const Edit = () => {
                                         <div className="form-group">
                                             <label className='text-lg' htmlFor="plot_status">Plot Status</label>
                                             <select name='status' value={status} onChange={onInputChange} className="form-control text-dark my-4 px-2 py-2">
-                                                <option value={status}>{status}</option>
                                                 <option value="Sold">Sold</option>
                                                 <option value="Reserved">Reserve</option>
                                                 <option value="Available">Available</option>
